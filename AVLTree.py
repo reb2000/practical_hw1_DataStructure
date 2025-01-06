@@ -429,17 +429,6 @@ class AVLTree(object):
 
 		return num_promotions
 
-	def print_tree(self, node, level=0, prefix="Root: "):
-		if node is not None:
-			# Print the current node with its key, height, and balance factor
-			print(" " * (level * 4) + prefix + f"({node.key}, h={node.height}, bf={node.get_BF()})")
-
-			# Recursively print the left and right children
-			if node.left:
-				self.print_tree(node.left, level + 1, "L--- ")
-			if node.right:
-				self.print_tree(node.right, level + 1, "R--- ")
-
 	"""insert node in a binary search tree
 	@type node: AVLNode
 	@param node: node to insert
@@ -453,11 +442,9 @@ class AVLTree(object):
 		# if the tree is empty, the node is inserted at the root
 		if curr == None:
 			self.root = node
-			print('self root;',self.root.key)
 		# if the tree is not empty
 		else:
 			#we traverse the tree until we get to a NONE node
-			print('curr;',curr.is_real_node)
 			while curr.is_real_node():
 				curr_parent = curr
 				path_len += 1
@@ -773,7 +760,7 @@ class AVLTree(object):
 	"""returns the number of items in dictionary 
 
     @rtype: int
-    @returns: the number of items in dictionary, should only work on trees that were made entirely of insert\delete\join without split
+    @returns: the number of items in dictionary, should only work on trees that were made entirely of insert,delete,join without split
     """
 
 	def size(self):
@@ -790,98 +777,4 @@ class AVLTree(object):
 	"""
 	def get_root(self):
 		return self.root
-
-	# test
-
-print("insert test")
-tree = AVLTree()
-print('a;', tree.insert(8, "i"))
-tree.print_tree(tree.root)
-print('b;',tree.insert(6, "left"))
-tree.print_tree(tree.root)
-print('c;',tree.insert(3, "right"))
-tree.print_tree(tree.root)
-print("d;",tree.insert(15, "left of left"))
-tree.print_tree(tree.root)
-print('e;', tree.insert(54, "right of left"))
-tree.print_tree(tree.root)
-print('f',tree.insert(11, "left of right"))
-tree.print_tree(tree.root)
-
-'''print("search test")
-print(tree.search(12))  # Expected: (Node with key 12, 3)
-print(tree.search(8))  # Expected: (None, 2)
-print(tree.search(10))  # Expected: (Node with key 10, 1)
-print(tree.search(1))
-print(tree.search(26))
-print(tree.search(4))'''
-
-# Example test cases
-
-
-print("finger search test")
-result_node, path_length = tree.finger_search(11)
-print("node is here",result_node, path_length)
-
-result_node, path_length = tree.finger_search(100)
-print("node is here",result_node, path_length)
-
-result_node, path_length = tree.finger_search(1)
-print("node is here",result_node, path_length)
-
-result_node, path_length = tree.finger_search(7)
-print("node is here",result_node, path_length)
-
-result_node, path_length = tree.finger_search(8)
-print("node is here",result_node, path_length)
-result_node, path_length = tree.finger_search(15)
-print("node is here",result_node, path_length)
-#problemmmmmmmmm, if it has only one child it doesnt work!!!
-
-'''print("finger insert test")
-tree3 = AVLTree()
-print('a;', tree3.finger_insert(10, "i"))
-#tree3.print_tree(tree3.root)
-print('b;',tree3.finger_insert(5, "left"))
-#tree3.print_tree(tree3.root)
-print('c;',tree3.finger_insert(15, "right"))
-#tree3.print_tree(tree3.root)
-print("d;",tree3.finger_insert(1, "left of left"))
-#tree3.print_tree(tree3.root)
-print('e;', tree3.finger_insert(7, "right of left"))
-#tree3.print_tree(tree3.root)
-print('f',tree3.finger_insert(12, "left of right"))
-#tree3.print_tree(tree3.root)
-print('h;',tree3.finger_insert(29, "right of right"))
-#tree3.print_tree(tree3.root)
-print('i;',tree3.finger_insert(100, "right of right of right"))
-#tree3.print_tree(tree3.root)
-print('j;',tree3.finger_insert(11, "left of left of right"))
-tree3.print_tree(tree3.root)'''
-
-# Retrieve nodes and delete them
-'''node_to_delete, _ = tree3.finger_search(11)
-if node_to_delete and node_to_delete.is_real_node():
-    tree3.delete(node_to_delete)
-    print("Deleted node with key 11")
-tree3.print_tree(tree3.get_root())
-
-node_to_delete, _ = tree3.finger_search(29)
-if node_to_delete and node_to_delete.is_real_node():
-    tree3.delete(node_to_delete)
-    print("Deleted node with key 29")
-tree3.print_tree(tree3.get_root())
-
-node_to_delete, _ = tree3.finger_search(15)
-if node_to_delete and node_to_delete.is_real_node():
-    tree3.delete(node_to_delete)
-    print("Deleted node with key 15")
-tree3.print_tree(tree3.get_root())
-
-node_to_delete, _ = tree3.finger_search(10)
-print(node_to_delete)
-if node_to_delete and node_to_delete.is_real_node():
-    tree3.delete(node_to_delete)
-    print("Deleted node with key 10")
-tree3.print_tree(tree3.get_root())'''
 
