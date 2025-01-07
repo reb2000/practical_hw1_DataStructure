@@ -29,6 +29,7 @@ class AVLNode(object):
 
 	@rtype: bool
 	@returns: False if self is a virtual node, True otherwise.
+	complexity: O(1)
 	"""
 	def is_real_node(self):
 		if self.key == None:
@@ -199,6 +200,7 @@ class AVLNode(object):
     @type node: AVLNode
     @rtype: int
 	@return: the balance factor of the current node
+	complexity: O(1)
     """
 
 	def get_BF(self):
@@ -225,6 +227,7 @@ class AVLTree(object):
 	@rtype: (AVLNode,int)
 	@returns: a tuple (x,e) where x is the node corresponding to key (or None if not found),
 	and e is the number of edges on the path between the starting node and ending node+1.
+	complexity: O(log n)
 	"""
 
 
@@ -253,6 +256,7 @@ class AVLTree(object):
 	@rtype: (AVLNode,int)
 	@returns: a tuple (x,e) where x is the node corresponding to key (or None if not found),
 	and e is the number of edges on the path between the starting node and ending node+1.
+	complexity: O(log n)
 	"""
 
 	def finger_search(self, key):
@@ -296,52 +300,6 @@ class AVLTree(object):
 				curr_node = curr_node.get_right()
 
 		return None, path_len
-
-	"""performs a left rotation and updates fields accordingly
-
-	    @type node: AVLNode
-	    @param node: the node we're performing the rotation on
-	    @pre: node is in self, has a right son, and its right son has a left son
-	    """
-
-	'''def left_rotate(self, node):
-		new_root = node.right
-		left_subtree = new_root.left
-		new_root.left = node
-		node.right = left_subtree
-		if left_subtree is not None:
-			left_subtree.parent = node
-		new_root.parent = node.parent
-		node.parent = new_root
-		node.height = 1 + max(node.left.height if node.left else 0, node.right.height if node.right else 0)
-		new_root.height = 1 + max(new_root.left.height if new_root.left else 0,
-								  new_root.right.height if new_root.right else 0)
-		if new_root.parent is None:
-			self.root = new_root
-		return new_root
-
-	"""performs a right rotation and updates fields accordingly
-
-    @type node: AVLNode
-    @param node: the node we're performing the rotation on
-    @pre: node is in self, has a left son, and its left son has a right son
-    """
-
-	def right_rotate(self, node):
-		new_root = node.left
-		right_subtree = new_root.right
-		new_root.right = node
-		node.left = right_subtree
-		if right_subtree is not None:
-			right_subtree.parent = node
-		new_root.parent = node.parent
-		node.parent = new_root
-		node.height = 1 + max(node.left.height if node.left else 0, node.right.height if node.right else 0)
-		new_root.height = 1 + max(new_root.left.height if new_root.left else 0,
-								  new_root.right.height if new_root.right else 0)
-		if new_root.parent is None:
-			self.root = new_root
-		return new_root'''
 
 	"""doing right rotaion in order to keep the tree balace
 	@type criminal: AVLNode
@@ -395,6 +353,7 @@ class AVLTree(object):
     @type node: AVLNode 
     @param node: a node to perform balancing from
     @pre: node is in self
+    complexity: O(log n)
     """
 	def balance(self, case , node_to_insert_parent):
 		num_promotions = 0
@@ -471,7 +430,8 @@ class AVLTree(object):
 	@rtype: (AVLNode,int,int)
 	@returns: a 3-tuple (x,e,h) where x is the new node,
 	e is the number of edges on the path between the starting node and new node before rebalancing,
-	and h is the number of PROMOTE cases during the AVL rebalancing'''
+	and h is the number of PROMOTE cases during the AVL rebalancing
+	complexity: O(log n)'''
 
 	def insert(self, key, val):
 
@@ -498,6 +458,7 @@ class AVLTree(object):
 		@rtype: (AVLNode,int)
 		@returns:  (y,e) where y is the parent of node corresponding to key (or None if not found),
 		and e is the number of edges on the path between the starting node and ending node+1.
+		complexity: O(log n)
 		"""
 
 	def finger_search_parent(self, key):
@@ -544,6 +505,7 @@ class AVLTree(object):
 	"""insert node in a binary search tree, starting at the max
 		@type node: AVLNode
 		@param node: node to insert
+		complexity: O(log n)
 		"""
 
 	def finger_insertBST(self, node):
@@ -579,6 +541,7 @@ class AVLTree(object):
 	@returns: a 3-tuple (x,e,h) where x is the new node,
 	e is the number of edges on the path between the starting node and new node before rebalancing,
 	and h is the number of PROMOTE cases during the AVL rebalancing
+	complexity: O(log n)
 	"""
 	def finger_insert(self, key, val):
 
@@ -602,7 +565,7 @@ class AVLTree(object):
 		@param key: a node successor to be searched
 		@rtype: AVLNode
 		@returns: successor node 
-		compleity: worst case is O(log n)
+		complexity: worst case is O(log n)
 		"""
 
 	def successor(self, node):
@@ -672,7 +635,8 @@ class AVLTree(object):
 	"""deletes node from the dictionary
 
 	@type node: AVLNode
-	@pre: node is a real pointer to a node in self
+	@pre: node is a real pointer to a node in 
+	complexity: O(log n)
 	"""
 	def delete(self, node):
 		# Save parent of deleted node, for rebalancing
